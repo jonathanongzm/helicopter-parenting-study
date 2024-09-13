@@ -2,7 +2,7 @@
 
 ## General Information
 - **Dataset Name**: hp_dataset_cleaned.csv
-- **Description**: This dataset contains responses from a survey on helicopter parenting, filial piety, social competence, and related variables.
+- **Description**: This dataset includes survey responses on helicopter parenting, filial piety, social competence, and various demographic and psychosocial variables from single Malaysian adults. This codebook provides detailed descriptions of each item in the dataset, the possible responses for each variable, and how composite variables were created for analysis.
 
 ## Variable Descriptions
 
