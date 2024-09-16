@@ -1,6 +1,6 @@
 # Helicopter Parenting Study
 
-This repository contains the analysis, scripts, and data for the study titled **"Helicopter Parenting and Social Competence among Single Malaysian Adults: Filial Piety as a Moderator"** by Darlene M. Koh, Jonathan Z. Ong, and Goh Pei Hwa. The study explores how helicopter parenting influences social competence in single Malaysian adults and examines whether different dimensions of filial piety (Reciprocal and Authoritarian) moderate this relationship.
+This repository contains the analysis, scripts, and data for the study titled **"Helicopter Parenting and Social Competence among Single Malaysian Adults: Filial Piety as a Moderator"** by Darlene Mei-Yi Koh, Jonathan Z. Ong, and Goh Pei Hwa. The study explores how helicopter parenting influences social competence in single Malaysian adults and examines whether different dimensions of filial piety (Reciprocal and Authoritarian) moderate this relationship.
 
 ## Repository Structure
 
