@@ -6,8 +6,8 @@ This repository contains the analysis, scripts, and data for the study titled **
 
 The repository is organized as follows:
 
-- **hp_dataset_raw.csv**: The original dataset containing raw data collected for the study.
-- **hp_dataset_cleaned.csv**: The cleaned dataset used for analysis after data processing and cleaning.
+- **hp_dataset_raw.csv**: The original dataset containing raw data collected for the study. (available upon request)
+- **hp_dataset_cleaned.csv**: The cleaned dataset used for analysis after data processing and cleaning. (available upon request)
 - **codebook.md**: Contains a detailed description of the dataset, including variable definitions and coding information.
 - **results/**: Contains all output files generated from the analyses.
   - **correlations_descriptives/**: Includes correlation matrices and descriptive statistics.
