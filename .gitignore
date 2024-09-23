@@ -5,3 +5,4 @@
 *.Rproj
 hp_dataset_raw.csv
 hp_dataset_cleaned.csv
+results/
