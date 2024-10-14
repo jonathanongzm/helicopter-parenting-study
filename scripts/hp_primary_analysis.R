@@ -889,7 +889,20 @@ print(combined_models)
 
 ## 8.1 Setup -------------------------------------------------------------------
 
-### 8.1.1 Define Helper Functions ----
+### 8.1.1 Load Required Libraries ----
+
+# Ensure the necessary packages are installed and loaded
+required_packages <- c("dplyr", "ggplot2", "emmeans")
+installed_packages <- rownames(installed.packages())
+
+for (pkg in required_packages) {
+  if (!(pkg %in% installed_packages)) {
+    install.packages(pkg)
+  }
+  library(pkg, character.only = TRUE)
+}
+
+### 8.1.2 Define Helper Functions ----
 
 # Function to standardize variables, excluding specified variables
 standardize <- function(df, variables, exclude_vars = NULL) {
@@ -909,7 +922,7 @@ format_p_value <- function(p_value) {
   return(formatted_p_value)
 }
 
-### 8.1.2 Define Variables ----
+### 8.1.3 Define Variables ----
 
 # Define predictor variables
 base_predictors <- c("Helicopter_parenting")
@@ -917,12 +930,12 @@ moderators <- c("Reciprocal_filial_piety")
 covariates <- c("Gender", "Age", "Ethnicity_Chinese", "Relationship_experience")
 manifest_outcomes <- c("Relationship_initiation")
 
-### 8.1.3 Prepare the Dataset ----
+### 8.1.4 Prepare the Dataset ----
 
 # Use your dataset (assuming it's named 'd_with_outliers_with_cov')
 dataset <- d_with_outliers_with_cov
 
-# Define all variables
+# Define all variables to standardize
 all_vars_to_standardize <- c(base_predictors, moderators, covariates, manifest_outcomes)
 
 # Exclude dummy variables from standardization
@@ -954,6 +967,7 @@ moderator_values <- c(-1, 0, 1)  # -1 SD, Mean, +1 SD
 
 ### 8.2.3 Estimate Slopes Using emtrends() ----
 
+# Estimate the slopes
 emtrends_result <- emtrends(
   interaction_model, 
   specs = "Reciprocal_filial_piety", 
@@ -972,7 +986,7 @@ print(slopes_summary)
 # Format p-values for individual slopes
 formatted_p_values <- sapply(slopes_summary$p.value, format_p_value)
 
-## 8.2.5 Perform Pairwise Comparisons of Slopes ----
+### 8.2.5 Perform Pairwise Comparisons of Slopes ----
 
 # Compare the slopes between levels of the moderator with Tukey adjustment
 contrast_result <- pairs(emtrends_result, adjust = "tukey")
@@ -1112,12 +1126,29 @@ ggsave(filename = file.path(simple_slopes_dir, "interaction_plot_d_with_outliers
        height = plot_height,
        dpi = 300)  # Added dpi for higher resolution
 
-# Export slopes results to CSV
-write.csv(slopes_summary, 
+# Calculate the sample size (N) used in the model
+N <- nobs(interaction_model)
+
+# Add the sample size to the slopes summary
+slopes_summary$N <- N
+
+# Add the sample size to the contrast summary
+contrast_summary$N <- N
+
+# Format the slopes summary with formatted p-values
+slopes_summary_formatted <- slopes_summary %>%
+  mutate(p.value = formatted_p_values)
+
+# Format the contrast summary with formatted p-values
+contrast_summary_formatted <- contrast_summary %>%
+  mutate(p.value = formatted_contrast_p_values)
+
+# Export slopes results to CSV with N included
+write.csv(slopes_summary_formatted, 
           file.path(simple_slopes_dir, "emtrends_slopes_d_with_outliers_with_cov.csv"), 
           row.names = FALSE)
 
-# Export contrast results to CSV
-write.csv(contrast_summary, 
+# Export contrast results to CSV with N included
+write.csv(contrast_summary_formatted, 
           file.path(simple_slopes_dir, "emtrends_contrasts_d_with_outliers_with_cov.csv"), 
           row.names = FALSE)
