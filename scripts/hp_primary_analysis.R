@@ -403,9 +403,17 @@ c_cleaned$Ethnicity_Chinese <- ifelse(c_cleaned$Ethnicity_Chinese == "Chinese", 
 # Compute and save correlation matrix for the dataset
 compute_and_save_cor_matrix(c_cleaned, "cleaned", correlations_dir, selected_vars)
 
+# Calculate frequencies and percentages of Relationship_experience
+relationship_experience_freq <- c_cleaned %>%
+  group_by(Relationship_experience) %>%
+  summarise(
+    Frequency = n(),
+    Percentage = (n() / nrow(c_cleaned)) * 100
+  )
 
-# Load necessary libraries
-library(dplyr)
+# Display the frequency and percentage table
+print(relationship_experience_freq)
+
 
 # 5. Dealing with Multivariate Outliers =======================================
 
